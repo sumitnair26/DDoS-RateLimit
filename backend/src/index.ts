@@ -1,11 +1,14 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
+import cors from 'cors';
+import { string } from 'zod';
+require('dotenv').config()
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-
+app.use(cors());
 // Rate limiter configuration
 const otpLimiter = rateLimit({
     windowMs: 5 * 60 * 1000, // 5 minutes
@@ -41,9 +44,25 @@ app.post('/generate-otp', otpLimiter, (req:any, res:any) => {
 });
 
 // Endpoint to reset password with rate limiting
-app.post('/reset-password', passwordResetLimiter, (req:any, res:any) => {
-    const { email, otp, newPassword } = req.body;
+app.post('/reset-password', passwordResetLimiter, async(req:any, res:any) => {
+    const { email, otp, newPassword, token } = req.body;
+    const SECRET_KEY:any = process.env.SECRET_KEY;
+    console.log(token);
+    console.log("dot env --", process.env.SECRET_KEY);
+    let formData = new FormData();
+	formData.append('secret', SECRET_KEY);
+	formData.append('response', token);
 
+    const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+        const result = await fetch(url, {
+            body: formData,
+            method: 'POST',
+        });
+    const challengeSucceeded = (await result.json()).success;
+
+    if (!challengeSucceeded) {
+        return res.status(403).json({ message: "Invalid reCAPTCHA token" });
+    }
     if (!email || !otp || !newPassword) {
         return res.status(400).json({ message: "Email, OTP, and new password are required" });
     }
