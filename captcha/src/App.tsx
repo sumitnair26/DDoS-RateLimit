@@ -27,7 +27,7 @@ function App() {
             axios.post("http://localhost:3000/reset-password",{
               email:"sumit.nair26@gmail.com",
               otp:"903109",
-             newPassword:"somenewpassword".
+             newPassword:"somenewpassword",
               token:token
             }
             )
