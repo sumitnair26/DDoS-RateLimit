@@ -1,6 +1,3 @@
-[Download
-
-](https://projects.100xdevs.com/pdf/rl-ddos-cap/Rate-limitting--DDoS-and-Captcha-1)
 
 # Why rate limitting
 
