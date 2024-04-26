@@ -19,4 +19,9 @@ When you allow a user to `reset their password` using an OTP from their email, t
 
 <img width="1434" alt="Screenshot 2024-04-26 at 13 22 58" src="https://github.com/sumitnair26/DDoS-RateLimit/assets/24470385/a662a083-1514-494e-b27e-7025b2c5e780">
 
+# Captcha
+
+![image](https://github.com/sumitnair26/RateLimiting-and-Captcha/assets/24470385/e7974edd-3392-4675-92f0-552a747989a6)
+
+
 
