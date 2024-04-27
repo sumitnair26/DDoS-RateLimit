@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useState } from 'react';
 function App() {
     const [token, setToken] = useState<string>("");
+    const [otp, setOTP] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     return (
     <>
       <div style={{
@@ -13,9 +15,13 @@ function App() {
           alignItems: 'center',
           justifyContent: 'center',
       }}>
-        <input type="text" placeholder="OTP"  />
+        <input type="text" placeholder="OTP" onChange={(event: any)=> {
+          setOTP(event.target.value)
+        }} />
           <br></br>
-          <input placeholder="New Password"></input>
+          <input placeholder="New Password" onChange={(event: any)=>{
+            setPassword(event.target.value)
+          }}></input>
           <br></br>
           <p>
             <Turnstile onSuccess={(token) => {
@@ -24,10 +30,10 @@ function App() {
           </p>
           <br></br>
           <button onClick={()=>{
-            axios.post("http://localhost:3000/reset-password",{
+              axios.post("http://localhost:3000/reset-password",{
               email:"sumit.nair26@gmail.com",
-              otp:"903109",
-             newPassword:"somenewpassword",
+              otp:""+otp+"",
+              newPassword:password,
               token:token
             }
             )
