@@ -21,6 +21,8 @@ When you allow a user to `reset their password` using an OTP from their email, t
 
 # Captcha
 
+Captchas are a great-sh solution to making sure the request was sent by a human and not by a machine
+
 ![image](https://github.com/sumitnair26/RateLimiting-and-Captcha/assets/24470385/e7974edd-3392-4675-92f0-552a747989a6)
 
 
